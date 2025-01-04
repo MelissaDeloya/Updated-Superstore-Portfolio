@@ -1,57 +1,4 @@
-# Updated-Superstore-Portfolio
-CREATE TABLE ecom_data (
-    user_id VARCHAR(50),
-    session_duration INT,
-    purchase_flag BIT,
-    amount_spent DECIMAL(10, 2),
-    item_name VARCHAR(50)
-);
-
-INSERT INTO ecom_data (user_id, session_duration, purchase_flag, amount_spent, item_name)
-VALUES
-    ('aBcDeF123456', 3, 1, 25.50, 'Wireless Earbuds'),
-    ('gHiJkL789012', 4, 0, 0.00, NULL),
-    ('mNoPqR345678', 6, 1, 75.20, 'Smartphone Case'),
-    ('sTuVwX901234', 2, 0, 0.00, NULL),
-    ('yZaBcD567890', 5, 1, 10.75, 'Portable Charger'),
-    ('eFgHiJ123456', 4, 0, 0.00, NULL),
-    ('kLmNoP789012', 1, 1, 50.00, 'Bluetooth Speaker'),
-    ('qRsTuV345678', 2, 0, 0.00, NULL),
-    ('wXyZaB901234', 3, 1, 20.90, 'Fitness Tracker'),
-    ('zN53qR345321', 6, 1, 75.20, 'Smartphone Case'),
-    ('QrSFgH561764', 1, 1, 50.00, 'Bluetooth Speaker'),
-    ('cDeFgH567890', 4, 1, 150.75, 'Smartwatch');
-    
-
-
 Superstore 
---Sum of session
-SELECT SUM(session_duration)
-FROM ecom_data;
-
---Select the SUM of minutes that all users spent shopping for each item.
-SELECT SUM (session_duration), item_name
-FROM ecom_data 
-GROUP BY item_name
-
-SELECT * FROM movies;
-
-CREATE TABLE movies (
-	id INTEGER PRIMARY KEY,
-	title TEXT,
-	released INTEGER
-);
-
-INSERT INTO movies VALUES (1, "Tenet", 2020);
-INSERT INTO movies VALUES (2, "Wonder Woman 1984", 2020);
-INSERT INTO movies VALUES (3, "Soul", 2020);
-INSERT INTO movies VALUES (4, "The Midnight Sky", 2020);
-INSERT INTO movies VALUES (5, "Godzilla vs. Kong", 2021);
-INSERT INTO movies VALUES (6, "A Quiet Place Part II", 2021);
-
-SELECT * FROM movies
-WHERE released >= 2021
-ORDER BY released asc;
 
 CREATE TABLE superstore (
     item_id INTEGER PRIMARY KEY,
@@ -85,18 +32,62 @@ SELECT item_name , price
 FROM superstore
 ORDER BY price desc;
 
+-- Query #1 
+item_name	price
+Smart LED TV	549
+Memory Foam Mattress	499.99
+Robot Vacuum Cleaner	199.5
+Ergonomic Office Chair	189
+Air Purifier	129.5
+Stainless Steel Cookware Set	89.99
+Cotton Bedding Set	89
+Premium Coffee Maker	79.99
+Smart Home Security Camera	79.95
+Wireless Earbuds	49.99
+Slow Cooker	49.95
+Wireless Bluetooth Speaker	39.99
+Cutlery Set	34.5
+Non-Stick Baking Set	29.95
+Cozy Throw Blanket	24.99
+
 --Statistic of item prices - average 
 SELECT AVG(price), item_name
 FROM superstore
 GROUP BY item_name
 ORDER BY price desc;
 
+-- Query #2 
+AVG(price)	item_name
+549	Smart LED TV
+499.99	Memory Foam Mattress
+199.5	Robot Vacuum Cleaner
+189	Ergonomic Office Chair
+129.5	Air Purifier
+89.99	Stainless Steel Cookware Set
+89	Cotton Bedding Set
+79.99	Premium Coffee Maker
+79.95	Smart Home Security Camera
+49.99	Wireless Earbuds
+49.95	Slow Cooker
+39.99	Wireless Bluetooth Speaker
+34.5	Cutlery Set
+29.95	Non-Stick Baking Set
+24.99	Cozy Throw Blanket
+
 --Statistic about the price for items in the category of "Kitchen Supplies" -- Max Price
 SELECT MAX(price), item_name
 FROM superstore 
 WHERE category = "Kitchen Supplies" ;
 
+--Query #3 
+MAX(price)	item_name
+89.99	Stainless Steel Cookware Set
+
 --How many air purifiers are in stock?
 SELECT SUM(stock_quantity)
 FROM superstore
 WHERE item_name = "Air Purifier";
+
+-- Query #4 
+SUM(stock_quantity)
+35
